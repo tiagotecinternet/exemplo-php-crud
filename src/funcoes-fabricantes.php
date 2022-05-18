@@ -17,5 +17,12 @@ function lerFabricantes(PDO $conexao):array {
 
 // Inserir um fabricante
 function inserirFabricante(PDO $conexao, string $nome) {
-    
+    $sql = "INSERT INTO fabricantes(nome) VALUES('$nome')";
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $consulta->execute();
+    } catch (Exception $erro) {
+        die("Erro: " .$erro->getMessage());
+    }
 }

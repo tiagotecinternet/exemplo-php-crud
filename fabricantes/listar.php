@@ -16,6 +16,13 @@ $listaDeFabricantes = lerFabricantes($conexao);
         <hr>
         <h2>Lendo e carregando todos os fabricantes</h2>
 
+        <p>
+            <a href="inserir.php">
+                Inserir um novo fabricante
+            </a>
+        </p>
+
+
         <table>
             <caption>Lista de Fabricantes</caption>
             <thead>
