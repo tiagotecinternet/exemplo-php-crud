@@ -12,7 +12,7 @@ $listaDeFabricantes = lerFabricantes($conexao);
 </head>
 <body>
     <div class="container">
-        <h1>Fabricantes | SELECT</h1>
+        <h1>Fabricantes | SELECT - <a href="../index.php">Home</a></h1>
         <hr>
         <h2>Lendo e carregando todos os fabricantes</h2>
 
@@ -22,6 +22,10 @@ $listaDeFabricantes = lerFabricantes($conexao);
             </a>
         </p>
 
+    
+    <?php if(isset($_GET['status']) && $_GET['status'] == 'sucesso'){ ?>
+        <p>Fabricante atualizado com sucesso!</p>
+    <?php } ?>
 
         <table>
             <caption>Lista de Fabricantes</caption>
