@@ -1,3 +1,7 @@
+<!-- 
+    1) require das funções de fabricantes 
+    2) chamar a função lerFabricantes
+-->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -33,6 +37,11 @@
                 <select name="fabricante" id="fabricante" required>
                     <option value=""></option>
                     <!-- opções de fabricantes existentes no BANCO -->
+
+                    <!-- 3) programar um foreach
+                    para <option value='id'>nome</option> -->
+
+
                 </select>
             </p>
             <p>
