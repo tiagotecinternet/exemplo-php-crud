@@ -48,6 +48,21 @@ function inserirProduto(PDO $conexao, string $nome,
 }
 
 
+function lerUmProduto(PDO $conexao, int $id):array {
+    $sql = "SELECT id, nome, preco, quantidade, descricao, fabricante_id
+    FROM produtos WHERE id = :id";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+        $consulta->execute();
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $erro) {
+        die("Erro: ". $erro->getMessage());
+    }
+    return $resultado;
+}
+
 
 /* Funções Utilitárias */
 function formataMoeda(float $valor):string {
