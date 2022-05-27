@@ -1,6 +1,15 @@
 <?php
 require_once '../src/funcoes-fabricantes.php';
+require_once '../src/funcoes-produtos.php';
 $listaDeFabricantes = lerFabricantes($conexao);
+
+// Pegando o valor do id e sanitizando
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
+// Chamando a função e recebendo os dados do produto
+$produto = lerUmProduto($conexao, $id);
+
+dump($produto);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,7 +27,7 @@ $listaDeFabricantes = lerFabricantes($conexao);
         <form action="" method="post">
             <p>
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" required>
+                <input value="<?=$produto['nome']?>" type="text" name="nome" id="nome" required>
             </p>
 
             <p>
@@ -45,7 +54,7 @@ $listaDeFabricantes = lerFabricantes($conexao);
             </p>
             <p>
                 <label for="descricao">Descrição:</label> <br>
-                <textarea required name="descricao" id="descricao" cols="30" rows="3"></textarea>
+                <textarea required name="descricao" id="descricao" cols="30" rows="3"><?=$produto['descricao']?></textarea>
             </p>
             <button type="submit" name="atualizar">
                 Atualizar produto</button>
