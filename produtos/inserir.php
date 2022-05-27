@@ -1,7 +1,21 @@
-<!-- 
-    1) require das funções de fabricantes 
-    2) chamar a função lerFabricantes
--->
+<?php
+require_once '../src/funcoes-fabricantes.php';
+$listaDeFabricantes = lerFabricantes($conexao);
+
+if(isset($_POST['inserir'])){
+    require_once '../src/funcoes-produtos.php';
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+    $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT);
+    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+    $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+
+    inserirProduto($conexao, $nome, $preco, $quantidade, 
+                        $descricao, $fabricanteId);
+
+    header("location:listar.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,15 +48,18 @@
             </p>    
             <p>
                 <label for="fabricante">Fabricante:</label>
-                <select name="fabricante" id="fabricante" required>
-                    <option value=""></option>
-                    <!-- opções de fabricantes existentes no BANCO -->
+        <select name="fabricante" id="fabricante" required>
+            <option value=""></option>
 
-                    <!-- 3) programar um foreach
-                    para <option value='id'>nome</option> -->
-
-
-                </select>
+            <!-- 3) programar um foreach
+            para <option value='id'>nome</option> -->
+            <?php foreach($listaDeFabricantes as $fabricante) { ?>
+                 <!-- o value id é para o banco -->
+                <option value="<?=$fabricante['id']?>">
+                    <?=$fabricante['nome']?> <!-- exibição -->
+                </option>
+            <?php } ?>
+        </select>
             </p>
             <p>
                 <label for="descricao">Descrição:</label> <br>
