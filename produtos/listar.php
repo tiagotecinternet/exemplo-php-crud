@@ -30,12 +30,13 @@ $listaDeProdutos = lerProdutos($conexao);
                 <p>Fabricante: <?=$produto['fabricante']?></p>
                 <p>
                     <a href="atualizar.php?id=<?=$produto['id']?>">Atualizar</a> - 
-                    <a href="excluir.php?id=<?=$produto['id']?>">Excluir</a>
+                    <a class="excluir" href="excluir.php?id=<?=$produto['id']?>">Excluir</a>
                 </p>
             </article>            
         <?php } ?>
         </div>
 
     </div>
+    <script src="../js/confirm.js"></script>
 </body>
 </html>
