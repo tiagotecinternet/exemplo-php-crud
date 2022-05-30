@@ -8,8 +8,6 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 // Chamando a função e recebendo os dados do produto
 $produto = lerUmProduto($conexao, $id);
-
-dump($produto);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -32,13 +30,15 @@ dump($produto);
 
             <p>
                 <label for="preco">Preço:</label>
-                <input type="number" name="preco" id="preco" 
+                <input value="<?=$produto['preco']?>"
+                 type="number" name="preco" id="preco" 
                 min="0" max="10000" step="0.01" required>
             </p>    
 
             <p>
                 <label for="quantidade">Quantidade:</label>
-                <input type="number" name="quantidade" id="quantidade" 
+                <input value="<?=$produto['quantidade']?>"
+                 type="number" name="quantidade" id="quantidade" 
                 min="0" max="100" required>
             </p>    
             <p>
@@ -46,7 +46,14 @@ dump($produto);
         <select name="fabricante" id="fabricante" required>
             <option value=""></option>
             <?php foreach($listaDeFabricantes as $fabricante) { ?>
-                <option value="<?=$fabricante['id']?>">
+                <option 
+            <?php 
+            /* Se chave estrangeira for idêntica à chave primária (ou seja,
+            se o código do fabricante do produto bater com o código do 
+            fabricante), então coloque o atributo selected no option */
+            if($produto['fabricante_id'] === $fabricante['id']) echo " selected ";
+            ?> 
+                value="<?=$fabricante['id']?>">
                     <?=$fabricante['nome']?>
                 </option>
             <?php } ?>
