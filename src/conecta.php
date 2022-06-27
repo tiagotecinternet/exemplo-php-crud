@@ -13,6 +13,8 @@ try {
 
     // Habilita a verificação de erros (em geral e exceções)
     $conexao->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 } catch(Exception $erro){
     die("Deu ruim: " .$erro->getMessage());
 }
+
