@@ -28,11 +28,11 @@ abstract class Banco {
             );
             self::$conexao->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "Ok!"; // teste
+            //echo "Ok!"; // teste
         } catch (Exception $erro) {
             die("Deu ruim: ".$erro->getMessage());
         }
         return self::$conexao;
     }
 }
-Banco::conecta(); // teste
+//Banco::conecta(); // teste
