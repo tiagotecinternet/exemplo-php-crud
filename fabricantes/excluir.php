@@ -1,5 +1,7 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-excluirFabricante($conexao, $id);
+use CrudPoo\Fabricante;
+require_once "../vendor/autoload.php";
+$fabricante = new Fabricante;
+$fabricante->setId($_GET['id']);
+$fabricante->excluirFabricante();
 header("location:listar.php");
