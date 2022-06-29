@@ -7,19 +7,7 @@ $fabricante = lerUmFabricante($conexao, $id);
 
 if (isset($_POST['atualizar'])) {
     $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS); 
-
     atualizarFabricante($conexao, $id, $nome);
-
-    //header("location:listar.php");
-
-    // Mensagem + refresh
-    /* echo "<p>Fabricante atualizado com sucesso!</p>";
-    header("Refresh:3; url=listar.php"); */
-
-    // Só com o nome do parâmetro:
-    // header("location:listar.php?sucesso");
-    
-    // Com nome de parâmetro e valor
     header("location:listar.php?status=sucesso");
 }
 ?>
