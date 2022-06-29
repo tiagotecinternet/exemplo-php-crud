@@ -9,9 +9,7 @@ $dadosFabricante = $fabricante->lerUmFabricante();
 
 if (isset($_POST['atualizar'])) {
     $fabricante->setNome( $_POST['nome'] ); 
-
     $fabricante->atualizarFabricante();
-
     header("location:listar.php?status=sucesso");
 }
 ?>
