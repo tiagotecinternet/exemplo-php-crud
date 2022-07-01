@@ -95,6 +95,19 @@ final class Produto {
 
 
 
+    public function excluirProduto():void {
+        $sql = "DELETE FROM produtos WHERE id = :id";
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die("Erro: ". $erro->getMessage());
+        }
+    }
+
+
+
 
     /**
      * Get the value of id
