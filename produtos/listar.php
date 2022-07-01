@@ -1,8 +1,12 @@
 <?php
-use CrudPoo\Produto;
 require_once "../vendor/autoload.php";
+
+use CrudPoo\Produto;
+use CrudDiversos\Utilitarios;
+
 $produto = new Produto;
 $listaDeProdutos = $produto->lerProdutos();
+Utilitarios::teste($listaDeProdutos);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,8 +27,8 @@ $listaDeProdutos = $produto->lerProdutos();
         <?php foreach($listaDeProdutos as $produto){ ?>    
             <article>
                 <h3> <?=$produto['produto']?> </h3>
-                <p>Preço: R$
-                <?=number_format($produto['preco'], 2, ",", ".")?>
+                <p>Preço: 
+                <?=Utilitarios::trataMoeda($produto['preco'])?>
                 </p>
                 <p>Quantidade: <?=$produto['quantidade']?></p>
                 <p><?=$produto['descricao']?></p>
