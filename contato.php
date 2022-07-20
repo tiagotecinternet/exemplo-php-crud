@@ -16,8 +16,10 @@ if(isset($_POST['enviar'])){
 
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
+    $mail->CharSet = "UTF-8";
 
     try {
+        // Configurações do servidor de e-mail
         $mail->isSMTP();
         $mail->Host = 'smtp.mailtrap.io';
         $mail->SMTPAuth = true;
@@ -25,28 +27,34 @@ if(isset($_POST['enviar'])){
         $mail->Username = 'fd19a4733332bc';
         $mail->Password = '12f36e49f4953d';
 
-        //Recipients
-        $mail->setFrom('from@example.com', 'Mailer');
-        $mail->addAddress('joe@example.net', 'Joe User');     
-        //Add a recipient
-        $mail->addAddress('ellen@example.com');               
-        //Name is optional
-        $mail->addReplyTo('info@example.com', 'Information');
-        $mail->addCC('cc@example.com');
-        $mail->addBCC('bcc@example.com');
+        //Quem envia
+        $mail->setFrom('contato@sitecrud.com', 'Site Crud');
+        
+        // Quem recebe
+        $mail->addAddress('fulano@sitecrud.com', 'Fulano');
 
+
+        // Para quem responder
+        $mail->addReplyTo($email, 'Retorno do contato');
 
         //Content
         $mail->isHTML(true);                                  
+        
         //Set email format to HTML
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->Subject = "Contato Site - ".$assunto;
+        
+        // Corpo da mensagem em formato HTML
+        $mail->Body    = "<b>Nome:</b> $nome <br> 
+        <b>E-mail:</b> $email <br> <b>Assunto: $assunto</b> <br>
+        <b>Mensagem:</b> $mensagem";
+        
+        // Corpo da mensagem em formato texto puro
+        $mail->AltBody = "Nome: $nome \n E-mail: $email \n Assunto: $assunto \n Mensagem: $mensagem";
 
         $mail->send();
-        echo 'Message has been sent';
+        echo 'Mensagem foi enviada com sucesso!';
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo "Ops! Deu ruim: {$mail->ErrorInfo}";
     }
 } // final do if enviar
 ?>
@@ -76,9 +84,9 @@ if(isset($_POST['enviar'])){
             <label for="assunto">Assunto:</label>
             <select name="assunto" id="assunto" required>
                 <option value=""></option>
-                <option value="duvidas">Dúvidas</option>
-                <option value="reclamacoes">Reclamações</option>
-                <option value="elogios">Elogios</option>
+                <option>Dúvidas</option>
+                <option>Reclamações</option>
+                <option>Elogios</option>
             </select>
         </p>
 
